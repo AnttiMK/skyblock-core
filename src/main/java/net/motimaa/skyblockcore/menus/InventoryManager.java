@@ -1,40 +1,35 @@
 package net.motimaa.skyblockcore.menus;
 
-import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.SubSystem;
-import net.motimaa.skyblockcore.menus.npc.BankerMenu;
+import net.motimaa.skyblockcore.menus.npc.banker.BankerMenu;
+import net.motimaa.skyblockcore.menus.player.MainMenu;
 import net.motimaa.skyblockcore.player.PlayerProvider;
+import net.motimaa.skyblockcore.player.SkyblockPlayer;
+import net.motimaa.skyblockcore.protocol.SignGUIFactory;
+import net.motimaa.skyblockcore.providers.VaultProvider;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @Singleton
 public class InventoryManager implements SubSystem {
 
-    private final Map<UUID, BankerMenu> bankerGUIMap = new HashMap<>();
     private final PlayerProvider playerProvider;
+    private final VaultProvider vaultProvider;
+    private final SignGUIFactory signGUIFactory;
 
     @Inject
-    public InventoryManager(PlayerProvider playerProvider) {
+    public InventoryManager(
+            PlayerProvider playerProvider,
+            VaultProvider vaultProvider,
+            SignGUIFactory signGUIFactory
+    ) {
         this.playerProvider = playerProvider;
-    }
-
-    public static void openInventory(Player player, InventoryType type) {
-        SkyblockCore.getInstance().getSystem().getPlayerProvider().player(player).openInventory(type);
-    }
-
-    @Override
-    public void enable() {
-    }
-
-    @Override
-    public void disable() {
-        closeAll();
+        this.vaultProvider = vaultProvider;
+        this.signGUIFactory = signGUIFactory;
     }
 
     /**
@@ -43,6 +38,23 @@ public class InventoryManager implements SubSystem {
     private void closeAll() {
         Bukkit.getOnlinePlayers().stream()
                 .filter(p -> p.getOpenInventory().getTopInventory().getHolder() instanceof AbstractInventory)
-                .forEach(Player::closeInventory);
+                .forEach(HumanEntity::closeInventory);
+    }
+
+    public void openInventory(Player player, InventoryType type) {
+        SkyblockPlayer sbPlayer = playerProvider.get(player);
+        switch (type) {
+            case BANKER -> player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new BankerMenu(this.vaultProvider, this.signGUIFactory)).getInventory());
+            case MAIN_MENU -> player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new MainMenu(player)).getInventory());
+        }
+    }
+
+    @Override
+    public void enable() {
+    }
+
+    @Override
+    public void disable() {
+        this.closeAll();
     }
 }

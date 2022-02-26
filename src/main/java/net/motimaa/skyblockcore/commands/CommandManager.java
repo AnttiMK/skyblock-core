@@ -1,7 +1,9 @@
 package net.motimaa.skyblockcore.commands;
 
+import net.motimaa.skyblockcore.SkyblockCore;
+import net.motimaa.skyblockcore.commands.admin.SetSpawnCommand;
 import net.motimaa.skyblockcore.commands.general.HelpCommand;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.motimaa.skyblockcore.commands.general.SpawnCommand;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -9,22 +11,27 @@ import java.util.logging.Logger;
 
 public class CommandManager {
 
-    private final JavaPlugin plugin;
+    private final SkyblockCore plugin;
     private final Logger logger;
     private final HashMap<String, SkyblockCommand> commands = new HashMap<>();
 
     @Inject
     public CommandManager(
-            JavaPlugin plugin,
+            SkyblockCore plugin,
             Logger logger,
 
-            HelpCommand helpCommand
+            HelpCommand helpCommand,
+            SpawnCommand spawnCommand,
+
+            SetSpawnCommand setSpawnCommand
     ) {
         this.plugin = plugin;
         this.logger = logger;
 
         this.register(
-                helpCommand
+                helpCommand,
+                spawnCommand,
+                setSpawnCommand
         );
     }
 

@@ -4,10 +4,14 @@ plugins {
 }
 
 group = 'net.motimaa'
-version = '0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
 
 tasks.withType(JavaCompile).configureEach {
-    options.release = 16
+    options.release = 17
     options.encoding = 'UTF-8'
 }
 
@@ -37,22 +41,29 @@ repositories {
         name "PlaceholderAPI"
         url "https://repo.extendedclip.com/content/repositories/placeholderapi/"
     }
+    maven {
+        name "ProtocolLib"
+        url "https://repo.dmulloy2.net/repository/public/"
+    }
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.3'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.6'
-    compileOnly 'net.citizensnpcs:citizens-main:2.0.28-SNAPSHOT'
+    compileOnly 'net.citizensnpcs:citizens-main:2.0.29-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.10.10'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:4.7.0'
+
+    implementation 'org.spongepowered:configurate-yaml:4.1.2'
 
     // Dependency injection
-    implementation 'com.google.dagger:dagger:2.40'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.40'
+    implementation 'com.google.dagger:dagger:2.40.5'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.40.5'
 
     // Tools
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 processResources {
@@ -67,9 +78,12 @@ processResources {
 tasks.build.dependsOn tasks.shadowJar
 
 shadowJar {
-    relocate 'com.google.gson', 'lib.com.google.gson'
-    relocate 'dagger', 'lib.dagger'
-    relocate 'javax.inject', 'lib.javax.inject'
+    relocate 'com.google.gson', 'net.motimaa.lib.com.google.gson'
+    relocate 'dagger', 'net.motimaa.lib.dagger'
+    relocate 'javax.inject', 'net.motimaa.lib.javax.inject'
+    relocate 'org.spongepowered', 'net.motimaa.lib.org.spongepowered'
+    relocate 'org.yaml', 'net.motimaa.lib.org.yaml'
+    relocate 'io.leangen', 'net.motimaa.lib.io.leangen'
 
     destinationDirectory.set(file("$rootDir/builds/"))
     archiveBaseName.set('SkyblockCore')

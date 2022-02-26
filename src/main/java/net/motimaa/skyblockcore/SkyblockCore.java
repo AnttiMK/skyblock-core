@@ -1,7 +1,10 @@
 package net.motimaa.skyblockcore;
 
+import net.milkbowl.vault.economy.Economy;
 import net.motimaa.skyblockcore.commands.CommandManager;
+import net.motimaa.skyblockcore.providers.EconomyProvider;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -16,10 +19,6 @@ public final class SkyblockCore extends JavaPlugin {
     private PluginManager pluginManager;
     private CommandManager commandManager;
 
-    public static SkyblockCore getInstance() {
-        return instance;
-    }
-
     @Override
     public void onEnable() {
         instance = this;
@@ -30,6 +29,8 @@ public final class SkyblockCore extends JavaPlugin {
                 .plugin(this)
                 .logger(logger)
                 .build();
+
+        getServer().getServicesManager().register(Economy.class, new EconomyProvider(this), this, ServicePriority.Highest);
 
         try {
             this.system = component.system();
@@ -45,10 +46,11 @@ public final class SkyblockCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        system.disable();
     }
 
     public MainSystem getSystem() {
         return system;
     }
+
 }

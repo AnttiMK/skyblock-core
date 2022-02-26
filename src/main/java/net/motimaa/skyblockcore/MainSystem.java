@@ -1,9 +1,10 @@
 package net.motimaa.skyblockcore;
 
 import net.motimaa.skyblockcore.listener.ListenerSystem;
+import net.motimaa.skyblockcore.menus.InventoryManager;
 import net.motimaa.skyblockcore.npcs.NPCManager;
 import net.motimaa.skyblockcore.player.PlayerProvider;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.motimaa.skyblockcore.settings.locale.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,23 +18,29 @@ public class MainSystem implements SubSystem {
 
     private static final long ENABLE_TIMER_START = System.currentTimeMillis();
 
-    private final JavaPlugin plugin;
+    private final SkyblockCore plugin;
     private final ListenerSystem listenerSystem;
+    private final Locale locale;
     private final NPCManager npcManager;
     private final PlayerProvider playerProvider;
+    private final InventoryManager inventoryManager;
 
     @Inject
     public MainSystem(
-            JavaPlugin plugin,
+            SkyblockCore plugin,
             Logger logger,
             ListenerSystem listenerSystem,
+            Locale locale,
             NPCManager npcManager,
-            PlayerProvider playerProvider
+            PlayerProvider playerProvider,
+            InventoryManager inventoryManager
     ) {
         this.plugin = plugin;
         this.listenerSystem = listenerSystem;
+        this.locale = locale;
         this.npcManager = npcManager;
         this.playerProvider = playerProvider;
+        this.inventoryManager = inventoryManager;
 
         logger.info("");
         logger.info("   _____ ____  ______                   _____");
@@ -47,9 +54,9 @@ public class MainSystem implements SubSystem {
 
     @Override
     public void enable() {
-
         enableSystems(
                 listenerSystem,
+                locale,
                 npcManager
         );
     }
@@ -59,6 +66,7 @@ public class MainSystem implements SubSystem {
 
         disableSystems(
                 listenerSystem,
+                locale,
                 npcManager
         );
     }
@@ -77,5 +85,9 @@ public class MainSystem implements SubSystem {
 
     public PlayerProvider getPlayerProvider() {
         return playerProvider;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 }

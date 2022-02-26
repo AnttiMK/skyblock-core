@@ -1,19 +1,19 @@
 package net.motimaa.skyblockcore.npcs.traits;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.trait.Trait;
-import net.citizensnpcs.api.trait.TraitName;
 import net.kyori.adventure.text.Component;
-import net.motimaa.skyblockcore.menus.InventoryManager;
+import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.menus.InventoryType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
-@TraitName("banker")
-public class Banker extends Trait {
+public class Banker extends BaseTrait {
 
-    public Banker() {
-        super("banker");
+    private final SkyblockCore plugin;
+
+    public Banker(SkyblockCore plugin) {
+        super();
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -22,6 +22,6 @@ public class Banker extends Trait {
 
         Player player = event.getClicker();
         player.sendMessage(Component.text("Opening bank GUI..."));
-        InventoryManager.openInventory(player, InventoryType.BANKER);
+        plugin.getSystem().getInventoryManager().openInventory(player, InventoryType.BANKER);
     }
 }

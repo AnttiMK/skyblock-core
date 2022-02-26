@@ -3,13 +3,15 @@ package net.motimaa.skyblockcore;
 import dagger.BindsInstance;
 import dagger.Component;
 import net.motimaa.skyblockcore.commands.CommandManager;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.motimaa.skyblockcore.modules.ObjectProviderModule;
 
 import javax.inject.Singleton;
 import java.util.logging.Logger;
 
 @Singleton
-@Component
+@Component(modules = {
+        ObjectProviderModule.class
+})
 public interface SkyblockCoreComponent {
 
     CommandManager commandManager();
@@ -20,7 +22,7 @@ public interface SkyblockCoreComponent {
     interface Builder {
 
         @BindsInstance
-        Builder plugin(JavaPlugin plugin);
+        Builder plugin(SkyblockCore plugin);
 
         @BindsInstance
         Builder logger(Logger logger);

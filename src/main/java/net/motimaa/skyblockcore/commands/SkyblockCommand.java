@@ -1,6 +1,7 @@
 package net.motimaa.skyblockcore.commands;
 
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -16,7 +17,7 @@ public abstract class SkyblockCommand extends Command {
         super(name, description, usageMessage, aliases);
     }
 
-    public List<String> getTabCompletions() {
+    public List<String> getTabCompletions(@NotNull CommandSender sender, @NotNull String[] args) {
         return Collections.emptyList();
     }
 }

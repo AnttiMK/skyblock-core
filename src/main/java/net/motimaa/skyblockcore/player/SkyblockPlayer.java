@@ -2,8 +2,6 @@ package net.motimaa.skyblockcore.player;
 
 import net.motimaa.skyblockcore.menus.AbstractInventory;
 import net.motimaa.skyblockcore.menus.InventoryType;
-import net.motimaa.skyblockcore.menus.npc.BankerMenu;
-import net.motimaa.skyblockcore.menus.player.MainMenu;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -18,11 +16,7 @@ public class SkyblockPlayer {
         this.player = player;
     }
 
-    public void openInventory(InventoryType type) {
-        switch (type) {
-            case BANKER -> this.player.openInventory(inventories.computeIfAbsent(type, k -> new BankerMenu(player)).getInventory());
-            case MAIN_MENU -> this.player.openInventory(inventories.computeIfAbsent(type, k -> new MainMenu(player)).getInventory());
-        }
+    public Map<InventoryType, AbstractInventory> getInventories() {
+        return inventories;
     }
-
 }

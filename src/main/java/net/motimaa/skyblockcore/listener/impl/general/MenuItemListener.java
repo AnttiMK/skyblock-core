@@ -1,9 +1,10 @@
-package net.motimaa.skyblockcore.listener.impl;
+package net.motimaa.skyblockcore.listener.impl.general;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.motimaa.skyblockcore.menus.InventoryManager;
 import net.motimaa.skyblockcore.menus.InventoryType;
 import net.motimaa.skyblockcore.player.PlayerProvider;
 import org.bukkit.Material;
@@ -29,10 +30,15 @@ public class MenuItemListener implements Listener {
 
     private final ItemStack menuItem;
     private final PlayerProvider playerProvider;
+    private final InventoryManager inventoryManager;
 
     @Inject
-    public MenuItemListener(PlayerProvider playerProvider) {
+    public MenuItemListener(
+            PlayerProvider playerProvider,
+            InventoryManager inventoryManager
+    ) {
         this.playerProvider = playerProvider;
+        this.inventoryManager = inventoryManager;
         this.menuItem = item();
     }
 
@@ -44,17 +50,20 @@ public class MenuItemListener implements Listener {
 
     @EventHandler
     public void onItemRightClick(PlayerInteractEvent event) {
+        if (!(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR)) {
+            return;
+        }
         Player player = event.getPlayer();
         ItemStack mainHand = player.getInventory().getItemInMainHand();
 
-        if ((event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) && menuItem.isSimilar(mainHand)) {
-            playerProvider.player(player).openInventory(InventoryType.MAIN_MENU);
+        if (menuItem.isSimilar(mainHand)) {
+            inventoryManager.openInventory(player, InventoryType.MAIN_MENU);
         }
     }
 
     @EventHandler
     public void onItemInventoryClick(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player player) {
+        if (event.getWhoClicked() instanceof Player) {
             if (menuItem.isSimilar(event.getCurrentItem())) {
                 event.setCancelled(true);
             }

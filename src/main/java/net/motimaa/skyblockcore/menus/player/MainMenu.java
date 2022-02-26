@@ -10,7 +10,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 public class MainMenu extends AbstractInventory {
 
     public MainMenu(Player player) {
-        super(9, Component.text("Päävalikko"));
+        super(54, Component.text("Päävalikko"));
     }
 
     @Override

@@ -1,19 +1,19 @@
 package net.motimaa.skyblockcore.listener;
 
+import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.SubSystem;
 import net.motimaa.skyblockcore.commands.AsyncTabCompleteListener;
-import net.motimaa.skyblockcore.listener.impl.InventoryListener;
-import net.motimaa.skyblockcore.listener.impl.MenuItemListener;
-import net.motimaa.skyblockcore.listener.impl.PlayerLoginListener;
+import net.motimaa.skyblockcore.listener.impl.general.InventoryListener;
+import net.motimaa.skyblockcore.listener.impl.general.MenuItemListener;
+import net.motimaa.skyblockcore.listener.impl.general.PlayerLoginListener;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.inject.Inject;
 
 public class ListenerSystem implements SubSystem {
 
-    private final JavaPlugin plugin;
+    private final SkyblockCore plugin;
     private final AsyncTabCompleteListener asyncTabCompleteListener;
     private final InventoryListener inventoryListener;
     private final PlayerLoginListener playerLoginListener;
@@ -21,7 +21,7 @@ public class ListenerSystem implements SubSystem {
 
     @Inject
     public ListenerSystem(
-            JavaPlugin plugin,
+            SkyblockCore plugin,
             AsyncTabCompleteListener asyncTabCompleteListener,
             InventoryListener inventoryListener,
             PlayerLoginListener playerLoginListener,

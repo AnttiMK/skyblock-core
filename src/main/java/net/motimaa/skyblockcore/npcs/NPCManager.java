@@ -3,27 +3,34 @@ package net.motimaa.skyblockcore.npcs;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.TraitFactory;
 import net.citizensnpcs.api.trait.TraitInfo;
+import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.SubSystem;
 import net.motimaa.skyblockcore.npcs.traits.Banker;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.motimaa.skyblockcore.npcs.traits.BaseTrait;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+@Singleton
 public class NPCManager implements SubSystem {
 
-    private final JavaPlugin plugin;
+    private final SkyblockCore plugin;
     private final Logger logger;
     private final TraitFactory traitFactory;
+    private final List<TraitInfo> registeredTraits;
 
     @Inject
     public NPCManager(
-            JavaPlugin plugin,
+            SkyblockCore plugin,
             Logger logger
     ) {
         this.plugin = plugin;
         this.logger = logger;
         this.traitFactory = CitizensAPI.getTraitFactory();
+        this.registeredTraits = new ArrayList<>();
     }
 
     @Override
@@ -34,11 +41,14 @@ public class NPCManager implements SubSystem {
         }
 
         logger.info("registering traits");
-        traitFactory.registerTrait(TraitInfo.create(Banker.class));
+        registeredTraits.add(TraitInfo.create(BaseTrait.class).withSupplier((() -> new Banker(plugin))).withName("banker"));
+
+        registeredTraits.forEach(traitFactory::registerTrait);
     }
 
     @Override
     public void disable() {
-
+        plugin.getLogger().info("Unregistering traits...");
+        registeredTraits.forEach(traitFactory::deregisterTrait);
     }
 }

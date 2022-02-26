@@ -2,6 +2,7 @@ package net.motimaa.skyblockcore.menus;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -12,7 +13,10 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
@@ -22,8 +26,6 @@ import java.util.stream.IntStream;
  * https://github.com/aglerr/LazyLibs/blob/master/src/main/java/me/aglerr/lazylibs/inventory/LazyInventory.java
  */
 public abstract class AbstractInventory implements InventoryHolder {
-
-    private static Map<UUID, AbstractInventory> instanceMap = new HashMap<>();
 
     private final Inventory inventory;
     private final Map<Integer, Consumer<InventoryClickEvent>> itemHandlers = new HashMap<>();
@@ -252,6 +254,21 @@ public abstract class AbstractInventory implements InventoryHolder {
     public int[] getCorners() {
         int size = this.inventory.getSize();
         return IntStream.range(0, size).filter(i -> i < 2 || (i > 6 && i < 10) || i == 17 || i == size - 18 || (i > size - 11 && i < size - 7) || i > size - 3).toArray();
+    }
+
+    /**
+     * Fills the empty slots of the inventory with the specified item.
+     *
+     * @param item The item to fill the inventory with
+     */
+    public void setFiller(ItemStack item) {
+        ItemStack[] contents = this.inventory.getContents();
+        for (int i = 0, size = contents.length; i < size; i++) {
+            if (contents[i] == null || contents[i].getType() == Material.AIR) {
+                this.inventory.setItem(i, item);
+            }
+
+        }
     }
 
     @Override

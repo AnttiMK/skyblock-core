@@ -1,9 +1,10 @@
 name: SkyblockCore
 version: '${version}'
 main: net.motimaa.skyblockcore.SkyblockCore
-api-version: 1.17
+api-version: 1.18
 depend:
   - Citizens
   - LuckPerms
   - Vault
   - SuperiorSkyblock2
+  - ProtocolLib

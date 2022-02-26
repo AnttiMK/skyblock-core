@@ -20,7 +20,7 @@ public class HelpCommand extends SkyblockCommand {
     }
 
     @Override
-    public List<String> getTabCompletions() {
-        return super.getTabCompletions();
+    public List<String> getTabCompletions(@NotNull CommandSender sender, @NotNull String[] args) {
+        return super.getTabCompletions(sender, args);
     }
 }

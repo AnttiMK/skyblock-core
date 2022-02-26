@@ -1,5 +1,6 @@
-package net.motimaa.skyblockcore.listener.impl;
+package net.motimaa.skyblockcore.listener.impl.general;
 
+import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.menus.AbstractInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -8,21 +9,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.inject.Inject;
 
 public class InventoryListener implements Listener {
 
-    private final JavaPlugin plugin;
+    private final SkyblockCore plugin;
 
     @Inject
-    public InventoryListener(JavaPlugin plugin) {
+    public InventoryListener(SkyblockCore plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
+        plugin.getLogger().info(String.valueOf(e.getInventory().getHolder() instanceof AbstractInventory));
+        plugin.getLogger().info(String.valueOf(e.getClickedInventory() != null));
         if (e.getClickedInventory() != null && e.getInventory().getHolder() instanceof AbstractInventory inv) {
             boolean wasCancelled = e.isCancelled();
             e.setCancelled(true);

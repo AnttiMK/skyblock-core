@@ -1,4 +1,4 @@
-package net.motimaa.skyblockcore.listener.impl;
+package net.motimaa.skyblockcore.listener.impl.general;
 
 import net.motimaa.skyblockcore.player.PlayerProvider;
 import org.bukkit.event.EventHandler;
