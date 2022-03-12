@@ -2,6 +2,7 @@ package net.motimaa.skyblockcore.player;
 
 import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.SubSystem;
+import net.motimaa.skyblockcore.api.SkyblockPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -27,11 +28,11 @@ public class PlayerProvider implements SubSystem {
     }
 
     public SkyblockPlayer get(UUID uuid) {
-        return players.computeIfAbsent(uuid, k -> new SkyblockPlayer(Bukkit.getPlayer(k)));
+        return players.computeIfAbsent(uuid, k -> new SkyblockPlayerImpl(Bukkit.getPlayer(k)));
     }
 
     public void addPlayer(Player player) {
-        players.put(player.getUniqueId(), new SkyblockPlayer(player));
+        players.put(player.getUniqueId(), new SkyblockPlayerImpl(player));
     }
 
     public void removePlayer(UUID uuid) {
@@ -41,7 +42,7 @@ public class PlayerProvider implements SubSystem {
     @Override
     public void enable() {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            players.put(player.getUniqueId(), new SkyblockPlayer(player));
+            players.put(player.getUniqueId(), new SkyblockPlayerImpl(player));
         }
     }
 

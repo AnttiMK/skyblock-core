@@ -12,7 +12,6 @@ public class Banker extends BaseTrait {
     private final SkyblockCore plugin;
 
     public Banker(SkyblockCore plugin) {
-        super();
         this.plugin = plugin;
     }
 

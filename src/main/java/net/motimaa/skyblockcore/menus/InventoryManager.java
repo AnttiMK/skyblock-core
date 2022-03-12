@@ -1,10 +1,10 @@
 package net.motimaa.skyblockcore.menus;
 
 import net.motimaa.skyblockcore.SubSystem;
+import net.motimaa.skyblockcore.api.SkyblockPlayer;
 import net.motimaa.skyblockcore.menus.npc.banker.BankerMenu;
 import net.motimaa.skyblockcore.menus.player.MainMenu;
 import net.motimaa.skyblockcore.player.PlayerProvider;
-import net.motimaa.skyblockcore.player.SkyblockPlayer;
 import net.motimaa.skyblockcore.protocol.SignGUIFactory;
 import net.motimaa.skyblockcore.providers.VaultProvider;
 import org.bukkit.Bukkit;

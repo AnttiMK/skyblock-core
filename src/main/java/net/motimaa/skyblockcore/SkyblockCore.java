@@ -3,6 +3,7 @@ package net.motimaa.skyblockcore;
 import net.milkbowl.vault.economy.Economy;
 import net.motimaa.skyblockcore.commands.CommandManager;
 import net.motimaa.skyblockcore.providers.EconomyProvider;
+import net.motimaa.skyblockcore.storage.database.MySQLDB;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,6 +40,7 @@ public final class SkyblockCore extends JavaPlugin {
             system.enable();
 
             commandManager.registerCommands();
+            new MySQLDB().initialize();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e, () -> this.getClass().getSimpleName());
         }
