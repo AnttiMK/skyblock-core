@@ -15,6 +15,18 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+def determineCommitHash = {
+    // get the name of the last tag
+    def output = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = output // Only the std, not errors as it's not to worry about as long as it's a repo
+    }
+    return output.toString().trim()
+}
+
+project.ext.commitHash = determineCommitHash()
+
 repositories {
     mavenCentral()
     maven {
@@ -68,7 +80,10 @@ dependencies {
 }
 
 processResources {
-    def props = [version: version]
+    def props = [
+            version   : project.version,
+            commitHash: project.ext.commitHash
+    ]
     inputs.properties props
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
