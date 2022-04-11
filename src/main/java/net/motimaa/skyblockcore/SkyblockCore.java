@@ -13,18 +13,13 @@ import java.util.logging.Logger;
 
 public final class SkyblockCore extends JavaPlugin {
 
-    private static SkyblockCore instance;
-
     private MainSystem system;
-    private Logger logger;
-    private PluginManager pluginManager;
-    private CommandManager commandManager;
 
     @Override
     public void onEnable() {
-        instance = this;
-        this.logger = getLogger();
-        this.pluginManager = getServer().getPluginManager();
+        Logger logger = getLogger();
+        PluginManager pluginManager = getServer().getPluginManager();
+        this.saveDefaultConfig();
 
         SkyblockCoreComponent component = DaggerSkyblockCoreComponent.builder()
                 .plugin(this)
@@ -35,12 +30,12 @@ public final class SkyblockCore extends JavaPlugin {
 
         try {
             this.system = component.system();
-            this.commandManager = component.commandManager();
+            CommandManager commandManager = component.commandManager();
 
             system.enable();
 
             commandManager.registerCommands();
-            new MySQLDB().initialize();
+            new MySQLDB(this).initialize();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e, () -> this.getClass().getSimpleName());
         }

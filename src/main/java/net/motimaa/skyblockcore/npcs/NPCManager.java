@@ -40,10 +40,12 @@ public class NPCManager implements SubSystem {
             this.plugin.getServer().getPluginManager().disablePlugin(this.plugin);
         }
 
-        logger.info("registering traits");
         registeredTraits.add(TraitInfo.create(BaseTrait.class).withSupplier((() -> new Banker(plugin))).withName("banker"));
 
-        registeredTraits.forEach(traitFactory::registerTrait);
+        registeredTraits.forEach(traitInfo -> {
+            logger.info("Registering trait " + traitInfo.getTraitName());
+            traitFactory.registerTrait(traitInfo);
+        });
     }
 
     @Override
