@@ -1,6 +1,7 @@
 package net.motimaa.skyblockcore.commands;
 
 import net.motimaa.skyblockcore.SkyblockCore;
+import net.motimaa.skyblockcore.commands.admin.CrystalCommand;
 import net.motimaa.skyblockcore.commands.admin.SetSpawnCommand;
 import net.motimaa.skyblockcore.commands.general.HelpCommand;
 import net.motimaa.skyblockcore.commands.general.SpawnCommand;
@@ -23,7 +24,8 @@ public class CommandManager {
             HelpCommand helpCommand,
             SpawnCommand spawnCommand,
 
-            SetSpawnCommand setSpawnCommand
+            SetSpawnCommand setSpawnCommand,
+            CrystalCommand crystalCommand
     ) {
         this.plugin = plugin;
         this.logger = logger;
@@ -31,7 +33,8 @@ public class CommandManager {
         this.register(
                 helpCommand,
                 spawnCommand,
-                setSpawnCommand
+                setSpawnCommand,
+                crystalCommand
         );
     }
 

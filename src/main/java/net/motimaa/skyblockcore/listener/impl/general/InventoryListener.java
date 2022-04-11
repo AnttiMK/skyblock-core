@@ -23,6 +23,7 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
+        plugin.getLogger().info("");
         plugin.getLogger().info(String.valueOf(e.getInventory().getHolder() instanceof AbstractInventory));
         plugin.getLogger().info(String.valueOf(e.getClickedInventory() != null));
         if (e.getClickedInventory() != null && e.getInventory().getHolder() instanceof AbstractInventory inv) {

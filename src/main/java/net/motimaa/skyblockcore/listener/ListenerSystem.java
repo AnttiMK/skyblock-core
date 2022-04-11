@@ -53,10 +53,10 @@ public class ListenerSystem implements SubSystem {
         for (Object listener : listeners) {
             if (listener == null) {
                 throw new IllegalArgumentException("Listener can not be null!");
-            } else if (!(listener instanceof Listener)) {
+            } else if (!(listener instanceof Listener list)) {
                 throw new IllegalArgumentException("Listener needs to be of type " + listener.getClass().getName() + ", but was " + listener.getClass());
             } else {
-                this.plugin.getServer().getPluginManager().registerEvents((Listener) listener, this.plugin);
+                this.plugin.getServer().getPluginManager().registerEvents(list, this.plugin);
             }
         }
     }
