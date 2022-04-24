@@ -65,7 +65,7 @@ dependencies {
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.6'
     compileOnly 'net.citizensnpcs:citizens-main:2.0.29-SNAPSHOT'
-    compileOnly 'me.clip:placeholderapi:2.10.10'
+    compileOnly 'me.clip:placeholderapi:2.11.1'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
 
     // Dependency injection
