@@ -70,7 +70,7 @@ dependencies {
 
     // Dependency injection
     implementation 'com.google.dagger:dagger:2.41'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.43.1'
 
     // Tools
     implementation 'com.google.code.gson:gson:2.9.0'
