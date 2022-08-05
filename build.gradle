@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
     implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.7'
 }
 
 processResources {
