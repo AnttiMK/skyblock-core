@@ -7,11 +7,11 @@ group = 'net.motimaa'
 version = '1.0.0-SNAPSHOT'
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(19))
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.release = 17
+compileJava {
+    options.release = 19
     options.encoding = 'UTF-8'
 }
 
@@ -64,7 +64,7 @@ dependencies {
     compileOnly 'net.luckperms:api:5.4'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.6'
-    compileOnly 'net.citizensnpcs:citizens-main:2.0.29-SNAPSHOT'
+    compileOnly 'net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.11.1'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
 
