@@ -11,7 +11,7 @@ java {
 }
 
 compileJava {
-    options.release = 19
+    options.release = 18
     options.encoding = 'UTF-8'
 }
 
