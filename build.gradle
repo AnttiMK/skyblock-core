@@ -73,8 +73,8 @@ dependencies {
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
 
     // Dependency injection
-    implementation 'com.google.dagger:dagger:${daggerVersion}'
-    annotationProcessor 'com.google.dagger:dagger-compiler:${daggerVersion}'
+    implementation 'com.google.dagger:dagger:$daggerVersion'
+    annotationProcessor 'com.google.dagger:dagger-compiler:$daggerVersion'
 
     // Tools
     implementation 'com.google.code.gson:gson:2.9.0'
