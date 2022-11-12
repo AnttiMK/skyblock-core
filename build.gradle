@@ -59,24 +59,28 @@ repositories {
     }
 }
 
+ext {
+    daggerVersion = "2.44.1"
+}
+
 dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.4'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
-    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.6'
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.7'
     compileOnly 'net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.11.1'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
 
     // Dependency injection
-    implementation 'com.google.dagger:dagger:2.41'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
+    implementation 'com.google.dagger:dagger:${daggerVersion}'
+    annotationProcessor 'com.google.dagger:dagger-compiler:${daggerVersion}'
 
     // Tools
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
     implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.9'
 }
 
 processResources {
