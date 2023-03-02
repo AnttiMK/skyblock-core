@@ -1,7 +1,7 @@
 name: SkyblockCore
 version: '${version} (git: ${commitHash})'
 author: Kopo942
-main: net.motimaa.skyblockcore.SkyblockCore
+main: skyblockcore.dev.kopo.SkyblockCore
 api-version: 1.18
 depend:
   - Citizens

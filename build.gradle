@@ -3,7 +3,7 @@ plugins {
     id 'java'
 }
 
-group = 'net.motimaa'
+group = 'dev.kopo'
 version = '1.0.0-SNAPSHOT'
 int javaVersion = 17
 
