@@ -3,6 +3,7 @@ package net.motimaa.skyblockcore.listener;
 import net.motimaa.skyblockcore.SkyblockCore;
 import net.motimaa.skyblockcore.SubSystem;
 import net.motimaa.skyblockcore.commands.AsyncTabCompleteListener;
+import net.motimaa.skyblockcore.listener.impl.building.BlockPhysicsListener;
 import net.motimaa.skyblockcore.listener.impl.general.InventoryListener;
 import net.motimaa.skyblockcore.listener.impl.general.MenuItemListener;
 import net.motimaa.skyblockcore.listener.impl.general.PlayerLoginListener;
@@ -18,6 +19,7 @@ public class ListenerSystem implements SubSystem {
     private final InventoryListener inventoryListener;
     private final PlayerLoginListener playerLoginListener;
     private final MenuItemListener menuItemListener;
+    private final BlockPhysicsListener blockPhysicsListener;
 
     @Inject
     public ListenerSystem(
@@ -25,13 +27,15 @@ public class ListenerSystem implements SubSystem {
             AsyncTabCompleteListener asyncTabCompleteListener,
             InventoryListener inventoryListener,
             PlayerLoginListener playerLoginListener,
-            MenuItemListener menuItemListener
+            MenuItemListener menuItemListener,
+            BlockPhysicsListener blockPhysicsListener
     ) {
         this.plugin = plugin;
         this.asyncTabCompleteListener = asyncTabCompleteListener;
         this.inventoryListener = inventoryListener;
         this.playerLoginListener = playerLoginListener;
         this.menuItemListener = menuItemListener;
+        this.blockPhysicsListener = blockPhysicsListener;
     }
 
     @Override
@@ -40,7 +44,8 @@ public class ListenerSystem implements SubSystem {
                 asyncTabCompleteListener,
                 inventoryListener,
                 playerLoginListener,
-                menuItemListener
+                menuItemListener,
+                blockPhysicsListener
         );
     }
 
