@@ -18,13 +18,11 @@ import org.bukkit.entity.Player;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiPredicate;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -109,11 +107,7 @@ public final class SignGUIFactory {
             BlockPosition position = new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ());
             openSign.getBlockPositionModifier().write(0, position);
 
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(player, openSign);
-            } catch (InvocationTargetException e) {
-                plugin.getLogger().log(Level.SEVERE, "Failed to send sign edit packet", e);
-            }
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, openSign);
             openGUIs.put(player, this);
         }
 
