@@ -1,17 +1,20 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.github.johnrengelman.shadow' version '8.1.0'
     id 'java'
 }
 
 group = 'net.motimaa'
 version = '1.0.0-SNAPSHOT'
+int javaVersion = 17
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(19))
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
 }
 
 compileJava {
-    options.release = 18
+    options.release = javaVersion
     options.encoding = 'UTF-8'
 }
 
@@ -64,23 +67,27 @@ ext {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.4'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
-    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.7'
-    compileOnly 'net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT'
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.8-SNAPSHOT'
+    compileOnly('net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT') {
+        exclude group: '*', module: '*'
+    }
     compileOnly 'me.clip:placeholderapi:2.11.2'
-    compileOnly 'com.comphenix.protocol:ProtocolLib:4.8.0'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
 
     // Dependency injection
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Tools
-    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
     implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.0'
+    implementation('org.mariadb.jdbc:mariadb-java-client:3.1.0') {
+        exclude group: 'com.github.waffle', module: 'waffle-jna'
+    }
 }
 
 processResources {
@@ -106,6 +113,8 @@ shadowJar {
     relocate 'io.leangen', 'net.motimaa.lib.io.leangen'
     relocate 'com.zaxxer', 'net.motimaa.lib.com.zaxxer'
     relocate 'org.mariadb.jdbc', 'net.motimaa.lib.org.mariadb.jdbc'
+    relocate 'com.github', 'net.motimaa.lib.com.github'
+    relocate 'org.slf4j', 'net.motimaa.lib.org.slf4j'
 
     destinationDirectory.set(file("$rootDir/builds/"))
     archiveBaseName.set('SkyblockCore')
