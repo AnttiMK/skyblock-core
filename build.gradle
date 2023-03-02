@@ -60,6 +60,14 @@ repositories {
         name "ProtocolLib"
         url "https://repo.dmulloy2.net/repository/public/"
     }
+    maven {
+        name "CodeMC"
+        url "https://repo.codemc.org/repository/maven-public/"
+    }
+    maven {
+        name "bg-repo"
+        url "https://repo.bg-software.com/repository/api/"
+    }
 }
 
 ext {
@@ -76,6 +84,8 @@ dependencies {
     }
     compileOnly 'me.clip:placeholderapi:2.11.2'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
+    compileOnly 'me.blackvein.quests:quests-core:4.7.2'
+    compileOnly 'com.bgsoftware:SuperiorSkyblockAPI:2022.9'
 
     // Dependency injection
     implementation "com.google.dagger:dagger:$daggerVersion"
