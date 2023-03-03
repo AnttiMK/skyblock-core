@@ -6,8 +6,11 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dev.kopo.skyblockcore.SkyblockCore;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -47,6 +50,8 @@ public class Crystal {
     public void spawn() {
         this.armorStand = location.getWorld().spawn(location, ArmorStand.class, CreatureSpawnEvent.SpawnReason.CUSTOM);
         armorStand.setGravity(false);
+        armorStand.setInvisible(true);
+        armorStand.setItem(EquipmentSlot.HEAD, new ItemStack(Material.PLAYER_HEAD));
     }
 
     public void runTask() {
@@ -61,7 +66,6 @@ public class Crystal {
             this.task.cancel();
         } catch (IllegalStateException ignored) {
         }
-        ;
     }
 
     public Location getLocation() {
