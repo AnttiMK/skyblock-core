@@ -1,8 +1,8 @@
 name: SkyblockCore
 version: '${version} (git: ${commitHash})'
-author: Kopo942
-main: skyblockcore.dev.kopo.SkyblockCore
-api-version: 1.18
+author: AnttiMK
+main: dev.kopo.skyblockcore.SkyblockCore
+api-version: 1.19
 depend:
   - Citizens
   - LuckPerms
