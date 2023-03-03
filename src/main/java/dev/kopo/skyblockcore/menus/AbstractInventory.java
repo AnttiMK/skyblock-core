@@ -282,6 +282,13 @@ public abstract class AbstractInventory implements InventoryHolder {
         this.openHandlers.forEach(c -> c.accept(e));
     }
 
+    /**
+     * Handles the inventory close event.
+     *
+     * @param e The event
+     * @return false if the inventory should be closed, true otherwise. Returning true
+     * causes the inventory that fired the event to be reopened.
+     */
     public boolean handleClose(InventoryCloseEvent e) {
         onClose(e);
 

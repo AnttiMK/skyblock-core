@@ -1,17 +1,21 @@
 package dev.kopo.skyblockcore.npcs.traits;
 
+import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.menus.InventoryType;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.trait.Trait;
+import net.citizensnpcs.api.trait.TraitName;
 import net.kyori.adventure.text.Component;
-import dev.kopo.skyblockcore.SkyblockCore;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
-public class Banker extends BaseTrait {
+@TraitName("banker")
+public class Banker extends Trait {
 
     private final SkyblockCore plugin;
 
     public Banker(SkyblockCore plugin) {
+        super("banker");
         this.plugin = plugin;
     }
 

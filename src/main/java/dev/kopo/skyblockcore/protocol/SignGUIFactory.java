@@ -8,8 +8,8 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
-import net.kyori.adventure.text.Component;
 import dev.kopo.skyblockcore.SkyblockCore;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,12 +18,8 @@ import org.bukkit.entity.Player;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BiPredicate;
-import java.util.stream.Collectors;
 
 @Singleton
 public final class SignGUIFactory {
@@ -41,8 +37,8 @@ public final class SignGUIFactory {
         this.registerListeners();
     }
 
-    public SignGUI builder(List<String> text) {
-        return new SignGUI(text);
+    public SignGUI builder() {
+        return new SignGUI();
     }
 
     private void registerListeners() {
@@ -73,14 +69,55 @@ public final class SignGUIFactory {
 
     public final class SignGUI {
 
-        private final List<String> text;
+        private final List<Component> text;
         private boolean reopenIfFail;
         private BiPredicate<Player, String[]> response;
         private boolean forceClose;
         private Location location;
 
-        public SignGUI(List<String> text) {
-            this.text = text;
+        private SignGUI() {
+            this.text = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                this.text.add(Component.empty());
+            }
+        }
+
+        public SignGUI text(String... text) {
+            if (text.length > 4) {
+                throw new IllegalArgumentException("Text must be 4 lines or less!");
+            }
+
+            this.text.clear();
+            this.text.addAll(Arrays.stream(text).map(Component::text).toList());
+            return this;
+        }
+
+        public SignGUI text(List<Component> text) {
+            if (text.size() > 4) {
+                throw new IllegalArgumentException("Text must be 4 lines or less!");
+            }
+
+            this.text.clear();
+            this.text.addAll(text);
+            return this;
+        }
+
+        public SignGUI line(int line, String text) {
+            if (line < 0 || line > 3) {
+                throw new IllegalArgumentException("Line must be between 0 and 3!");
+            }
+
+            this.text.set(line, Component.text(text));
+            return this;
+        }
+
+        public SignGUI line(int line, Component text) {
+            if (line < 0 || line > 3) {
+                throw new IllegalArgumentException("Line must be between 0 and 3!");
+            }
+
+            this.text.set(line, text);
+            return this;
         }
 
         public SignGUI reopenIfFail(boolean value) {
@@ -101,7 +138,7 @@ public final class SignGUIFactory {
             this.location.setY(location.getBlockY() - 4);
 
             player.sendBlockChange(this.location, Material.OAK_SIGN.createBlockData());
-            player.sendSignChange(location, text.stream().map(Component::text).collect(Collectors.toList()));
+            player.sendSignChange(location, text);
 
             PacketContainer openSign = protocolManager.createPacket(PacketType.Play.Server.OPEN_SIGN_EDITOR);
             BlockPosition position = new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ());

@@ -1,8 +1,9 @@
 package dev.kopo.skyblockcore.menus;
 
+import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.SubSystem;
-import dev.kopo.skyblockcore.menus.npc.banker.BankerMenu;
 import dev.kopo.skyblockcore.api.SkyblockPlayer;
+import dev.kopo.skyblockcore.menus.npc.banker.BankerMenu;
 import dev.kopo.skyblockcore.menus.player.MainMenu;
 import dev.kopo.skyblockcore.player.PlayerProvider;
 import dev.kopo.skyblockcore.protocol.SignGUIFactory;
@@ -17,16 +18,19 @@ import javax.inject.Singleton;
 @Singleton
 public class InventoryManager implements SubSystem {
 
+    private final SkyblockCore plugin;
     private final PlayerProvider playerProvider;
     private final VaultProvider vaultProvider;
     private final SignGUIFactory signGUIFactory;
 
     @Inject
     public InventoryManager(
+            SkyblockCore plugin,
             PlayerProvider playerProvider,
             VaultProvider vaultProvider,
             SignGUIFactory signGUIFactory
     ) {
+        this.plugin = plugin;
         this.playerProvider = playerProvider;
         this.vaultProvider = vaultProvider;
         this.signGUIFactory = signGUIFactory;
@@ -44,8 +48,10 @@ public class InventoryManager implements SubSystem {
     public void openInventory(Player player, InventoryType type) {
         SkyblockPlayer sbPlayer = playerProvider.get(player);
         switch (type) {
-            case BANKER -> player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new BankerMenu(this.vaultProvider, this.signGUIFactory)).getInventory());
-            case MAIN_MENU -> player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new MainMenu(player)).getInventory());
+            case BANKER ->
+                    player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new BankerMenu(plugin, vaultProvider, signGUIFactory)).getInventory());
+            case MAIN_MENU ->
+                    player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new MainMenu(player)).getInventory());
         }
     }
 

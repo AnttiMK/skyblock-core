@@ -1,12 +1,11 @@
 package dev.kopo.skyblockcore.npcs;
 
+import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.SubSystem;
+import dev.kopo.skyblockcore.npcs.traits.Banker;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.trait.TraitFactory;
 import net.citizensnpcs.api.trait.TraitInfo;
-import dev.kopo.skyblockcore.SkyblockCore;
-import dev.kopo.skyblockcore.npcs.traits.Banker;
-import dev.kopo.skyblockcore.npcs.traits.BaseTrait;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +39,7 @@ public class NPCManager implements SubSystem {
             this.plugin.getServer().getPluginManager().disablePlugin(this.plugin);
         }
 
-        registeredTraits.add(TraitInfo.create(BaseTrait.class).withSupplier((() -> new Banker(plugin))).withName("banker"));
+        registeredTraits.add(TraitInfo.create(Banker.class).withSupplier(() -> new Banker(plugin)));
 
         registeredTraits.forEach(traitInfo -> {
             logger.info("Registering trait " + traitInfo.getTraitName());
@@ -53,4 +52,6 @@ public class NPCManager implements SubSystem {
         plugin.getLogger().info("Unregistering traits...");
         registeredTraits.forEach(traitFactory::deregisterTrait);
     }
+
+
 }
