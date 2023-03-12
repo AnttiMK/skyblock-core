@@ -1,7 +1,7 @@
 package dev.kopo.skyblockcore.listener.impl.general;
 
-import dev.kopo.skyblockcore.menus.AbstractInventory;
 import dev.kopo.skyblockcore.SkyblockCore;
+import dev.kopo.skyblockcore.menus.AbstractInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +26,7 @@ public class InventoryListener implements Listener {
 //        plugin.getLogger().info("");
 //        plugin.getLogger().info(String.valueOf(e.getInventory().getHolder() instanceof AbstractInventory));
 //        plugin.getLogger().info(String.valueOf(e.getClickedInventory() != null));
-        if (e.getClickedInventory() != null && e.getInventory().getHolder() instanceof AbstractInventory inv) {
+        if (e.getInventory().getHolder() instanceof AbstractInventory inv && e.getClickedInventory() != null) {
             boolean wasCancelled = e.isCancelled();
             e.setCancelled(true);
             inv.handleClick(e);

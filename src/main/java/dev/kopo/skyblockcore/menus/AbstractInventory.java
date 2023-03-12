@@ -62,11 +62,23 @@ public abstract class AbstractInventory implements InventoryHolder {
         }
     }
 
-    protected abstract void onClick(InventoryClickEvent event);
+    /**
+     * Click event preprocessor
+     *
+     * @param event The event
+     * @return true if the click should be processed further, false otherwise
+     */
+    protected boolean onClick(InventoryClickEvent event) {
+        return true;
+    }
 
-    protected abstract void onOpen(InventoryOpenEvent event);
+    protected void onOpen(InventoryOpenEvent event) {
 
-    protected abstract void onClose(InventoryCloseEvent event);
+    }
+
+    protected void onClose(InventoryCloseEvent event) {
+
+    }
 
     /**
      * Add an {@link ItemStack} to the inventory on the first empty slot.
@@ -298,7 +310,9 @@ public abstract class AbstractInventory implements InventoryHolder {
     }
 
     public void handleClick(InventoryClickEvent e) {
-        onClick(e);
+        if (!onClick(e)) {
+            return;
+        }
 
         this.clickHandlers.forEach(c -> c.accept(e));
 
