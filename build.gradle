@@ -84,7 +84,7 @@ dependencies {
     }
     compileOnly 'me.clip:placeholderapi:2.11.2'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
-    compileOnly 'me.blackvein.quests:quests-core:4.7.2'
+    compileOnly 'me.blackvein.quests:quests-core:4.8.1'
     compileOnly 'com.bgsoftware:SuperiorSkyblockAPI:2022.9'
 
     // Dependency injection
