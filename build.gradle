@@ -119,16 +119,16 @@ processResources {
 tasks.build.dependsOn tasks.shadowJar
 
 shadowJar {
-    relocate 'com.google.gson', 'net.motimaa.lib.com.google.gson'
-    relocate 'dagger', 'net.motimaa.lib.dagger'
-    relocate 'javax.inject', 'net.motimaa.lib.javax.inject'
-    relocate 'org.spongepowered', 'net.motimaa.lib.org.spongepowered'
-    relocate 'org.yaml', 'net.motimaa.lib.org.yaml'
-    relocate 'io.leangen', 'net.motimaa.lib.io.leangen'
-    relocate 'com.zaxxer', 'net.motimaa.lib.com.zaxxer'
-    relocate 'org.mariadb.jdbc', 'net.motimaa.lib.org.mariadb.jdbc'
-    relocate 'com.github', 'net.motimaa.lib.com.github'
-    relocate 'org.slf4j', 'net.motimaa.lib.org.slf4j'
+    relocate 'com.google.gson', 'dev.kopo.skyblockcore.lib.com.google.gson'
+    relocate 'dagger', 'dev.kopo.skyblockcore.lib.dagger'
+    relocate 'javax.inject', 'dev.kopo.skyblockcore.lib.javax.inject'
+    relocate 'org.spongepowered', 'dev.kopo.skyblockcore.lib.org.spongepowered'
+    relocate 'org.yaml', 'dev.kopo.skyblockcore.lib.org.yaml'
+    relocate 'io.leangen', 'dev.kopo.skyblockcore.lib.io.leangen'
+    relocate 'com.zaxxer', 'dev.kopo.skyblockcore.lib.com.zaxxer'
+    relocate 'org.mariadb.jdbc', 'dev.kopo.skyblockcore.lib.org.mariadb.jdbc'
+    relocate 'com.github', 'dev.kopo.skyblockcore.lib.com.github'
+    relocate 'org.slf4j', 'dev.kopo.skyblockcore.lib.org.slf4j'
 
     destinationDirectory.set(file("$rootDir/builds/"))
     archiveBaseName.set('SkyblockCore')

@@ -41,7 +41,7 @@ public class SpawnCommand extends SkyblockCommand {
         if (args.length == 0) {
             handleTeleport(player, player);
         } else if (args.length == 1) {
-            if (!player.hasPermission("motimaa.mod")) {
+            if (!player.hasPermission("skyblock.mod")) {
                 player.sendMessage(Component.text("Ei oikeutta."));
                 return true;
             }
