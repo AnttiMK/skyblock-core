@@ -1,12 +1,13 @@
 package dev.kopo.skyblockcore.listener;
 
-import dev.kopo.skyblockcore.SubSystem;
-import dev.kopo.skyblockcore.listener.impl.building.BlockPhysicsListener;
-import dev.kopo.skyblockcore.listener.impl.general.PlayerLoginListener;
 import dev.kopo.skyblockcore.SkyblockCore;
+import dev.kopo.skyblockcore.SubSystem;
 import dev.kopo.skyblockcore.commands.AsyncTabCompleteListener;
+import dev.kopo.skyblockcore.listener.impl.building.BlockPhysicsListener;
 import dev.kopo.skyblockcore.listener.impl.general.InventoryListener;
 import dev.kopo.skyblockcore.listener.impl.general.MenuItemListener;
+import dev.kopo.skyblockcore.listener.impl.general.PlayerLoginListener;
+import dev.kopo.skyblockcore.listener.impl.npc.FarmBlockListener;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
@@ -20,6 +21,7 @@ public class ListenerSystem implements SubSystem {
     private final PlayerLoginListener playerLoginListener;
     private final MenuItemListener menuItemListener;
     private final BlockPhysicsListener blockPhysicsListener;
+    private final FarmBlockListener farmBlockListener;
 
     @Inject
     public ListenerSystem(
@@ -28,7 +30,8 @@ public class ListenerSystem implements SubSystem {
             InventoryListener inventoryListener,
             PlayerLoginListener playerLoginListener,
             MenuItemListener menuItemListener,
-            BlockPhysicsListener blockPhysicsListener
+            BlockPhysicsListener blockPhysicsListener,
+            FarmBlockListener farmBlockListener
     ) {
         this.plugin = plugin;
         this.asyncTabCompleteListener = asyncTabCompleteListener;
@@ -36,6 +39,7 @@ public class ListenerSystem implements SubSystem {
         this.playerLoginListener = playerLoginListener;
         this.menuItemListener = menuItemListener;
         this.blockPhysicsListener = blockPhysicsListener;
+        this.farmBlockListener = farmBlockListener;
     }
 
     @Override
@@ -45,7 +49,8 @@ public class ListenerSystem implements SubSystem {
                 inventoryListener,
                 playerLoginListener,
                 menuItemListener,
-                blockPhysicsListener
+                blockPhysicsListener,
+                farmBlockListener
         );
     }
 

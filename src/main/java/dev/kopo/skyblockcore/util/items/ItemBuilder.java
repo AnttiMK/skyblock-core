@@ -1,17 +1,21 @@
 package dev.kopo.skyblockcore.util.items;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public final class ItemBuilder {
 
@@ -124,6 +128,38 @@ public final class ItemBuilder {
         if (hidden) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+        item.setItemMeta(meta);
+        return this;
+    }
+
+    public ItemBuilder meta(Function<ItemMeta, ItemMeta> itemMeta) {
+        item.setItemMeta(itemMeta.apply(item.getItemMeta()));
+        return this;
+    }
+
+    public ItemBuilder skullOwner(Player player) {
+        if (item.getType() != Material.PLAYER_HEAD && item.getType() != Material.PLAYER_WALL_HEAD) {
+            throw new IllegalArgumentException("Item must be a skull");
+        }
+        final SkullMeta meta = (SkullMeta) item.getItemMeta();
+        meta.setOwningPlayer(player);
+        item.setItemMeta(meta);
+        return this;
+    }
+
+    public ItemBuilder skullOwner(PlayerProfile playerProfile) {
+        if (item.getType() != Material.PLAYER_HEAD && item.getType() != Material.PLAYER_WALL_HEAD) {
+            throw new IllegalArgumentException("Item must be a skull");
+        }
+        final SkullMeta meta = (SkullMeta) item.getItemMeta();
+        meta.setPlayerProfile(playerProfile);
+        item.setItemMeta(meta);
+        return this;
+    }
+
+    public ItemBuilder modelData(int modelData) {
+        final ItemMeta meta = item.getItemMeta();
+        meta.setCustomModelData(modelData);
         item.setItemMeta(meta);
         return this;
     }

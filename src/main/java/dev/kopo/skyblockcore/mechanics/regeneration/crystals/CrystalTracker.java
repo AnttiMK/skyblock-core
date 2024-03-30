@@ -1,7 +1,8 @@
-package dev.kopo.skyblockcore.npcs.crystals;
+package dev.kopo.skyblockcore.mechanics.regeneration.crystals;
 
 import dev.kopo.skyblockcore.SkyblockCore;
 import org.bukkit.Location;
+import org.bukkit.event.block.BlockBreakEvent;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,6 +30,15 @@ public class CrystalTracker {
         this.crystals.add(crystal);
     }
 
+    public boolean onBlockBreak(BlockBreakEvent event) {
+        for (Crystal crystal : this.crystals) {
+            if (crystal.getLocation().getWorld().equals(event.getBlock().getWorld())) {
+                return crystal.onBlockBreak(event);
+            }
+        }
+        return false;
+    }
+
     public void reset() {
         Iterator<Crystal> iterator = this.crystals.listIterator();
         while (iterator.hasNext()) {
@@ -37,6 +47,10 @@ public class CrystalTracker {
             crystal.getArmorStand().remove();
             iterator.remove();
         }
+    }
+
+    public List<Crystal> getCrystals() {
+        return this.crystals;
     }
 
     public boolean existsAtLocation(Location location) {

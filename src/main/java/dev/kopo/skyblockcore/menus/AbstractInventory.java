@@ -13,7 +13,6 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +28,6 @@ public abstract class AbstractInventory implements InventoryHolder {
 
     private final Inventory inventory;
     private final Map<Integer, Consumer<InventoryClickEvent>> itemHandlers = new HashMap<>();
-    private final List<Consumer<InventoryOpenEvent>> openHandlers = new ArrayList<>();
-    private final List<Consumer<InventoryCloseEvent>> closeHandlers = new ArrayList<>();
-    private final List<Consumer<InventoryClickEvent>> clickHandlers = new ArrayList<>();
     private Predicate<Player> closeFilter;
 
     public AbstractInventory(int size) {
@@ -213,33 +209,6 @@ public abstract class AbstractInventory implements InventoryHolder {
     }
 
     /**
-     * Add a handler to handle inventory open.
-     *
-     * @param openHandler The handler to add.
-     */
-    public void addOpenHandler(Consumer<InventoryOpenEvent> openHandler) {
-        this.openHandlers.add(openHandler);
-    }
-
-    /**
-     * Add a handler to handle inventory close.
-     *
-     * @param closeHandler The handler to add
-     */
-    public void addCloseHandler(Consumer<InventoryCloseEvent> closeHandler) {
-        this.closeHandlers.add(closeHandler);
-    }
-
-    /**
-     * Add a handler to handle inventory click.
-     *
-     * @param clickHandler The handler to add.
-     */
-    public void addClickHandler(Consumer<InventoryClickEvent> clickHandler) {
-        this.clickHandlers.add(clickHandler);
-    }
-
-    /**
      * Open the inventory to a player.
      *
      * @param player The player to open the menu.
@@ -290,8 +259,6 @@ public abstract class AbstractInventory implements InventoryHolder {
 
     public void handleOpen(InventoryOpenEvent e) {
         onOpen(e);
-
-        this.openHandlers.forEach(c -> c.accept(e));
     }
 
     /**
@@ -304,8 +271,6 @@ public abstract class AbstractInventory implements InventoryHolder {
     public boolean handleClose(InventoryCloseEvent e) {
         onClose(e);
 
-        this.closeHandlers.forEach(c -> c.accept(e));
-
         return this.closeFilter != null && this.closeFilter.test((Player) e.getPlayer());
     }
 
@@ -313,8 +278,6 @@ public abstract class AbstractInventory implements InventoryHolder {
         if (!onClick(e)) {
             return;
         }
-
-        this.clickHandlers.forEach(c -> c.accept(e));
 
         Consumer<InventoryClickEvent> clickConsumer = this.itemHandlers.get(e.getRawSlot());
 

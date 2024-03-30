@@ -14,7 +14,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,12 +36,13 @@ public class BankerMenu extends AbstractInventory {
     }
 
     @Override
-    protected void onClick(InventoryClickEvent event) {
+    protected boolean onClick(InventoryClickEvent event) {
         event.setCancelled(true);
 
         // Double clicks cause three events to fire, and this is the action type for the third one
-        if (event.getAction().equals(InventoryAction.NOTHING)) return;
+        if (event.getAction().equals(InventoryAction.NOTHING)) return false;
         event.getWhoClicked().sendMessage(Component.text("clicked! action: " + event.getAction()));
+        return true;
     }
 
     @Override
@@ -56,15 +56,10 @@ public class BankerMenu extends AbstractInventory {
         }
     }
 
-    @Override
-    protected void onClose(InventoryCloseEvent event) {
-
-    }
-
     private void setItems(Player target) {
         this.setItem(11, this.depositItem(target), event -> signGUIFactory.builder()
                 .text("", "", "Kuinka paljon", "haluat tallettaa?")
-                .line(2, Component.text("                  ").decorate(TextDecoration.STRIKETHROUGH))
+                .line(1, Component.text("                  ").decorate(TextDecoration.STRIKETHROUGH))
                 .reopenIfFail(false)
                 .response((player, strings) -> {
                     if (!this.isDouble(strings[0])) {
@@ -80,7 +75,7 @@ public class BankerMenu extends AbstractInventory {
         );
         this.setItem(15, this.withdrawItem(target), event -> signGUIFactory.builder()
                 .text("", "", "Kuinka paljon", "haluat nostaa?")
-                .line(2, Component.text("                  ").decorate(TextDecoration.STRIKETHROUGH))
+                .line(1, Component.text("                  ").decorate(TextDecoration.STRIKETHROUGH))
                 .reopenIfFail(false)
                 .response((player, strings) -> {
                     if (!this.isDouble(strings[0])) {
@@ -92,6 +87,7 @@ public class BankerMenu extends AbstractInventory {
                     player.sendMessage(CHAT_PREFIX.append(Component.text("Nostettu tililtä " + strings[0])));
                     return true;
                 })
+                .open(target)
         );
         this.setItem(31, this.exitItem(), event -> Bukkit.getScheduler().runTaskLater(plugin, () -> target.closeInventory(), 1L));
     }

@@ -1,8 +1,8 @@
 package dev.kopo.skyblockcore.settings.locale;
 
+import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.SubSystem;
 import dev.kopo.skyblockcore.storage.FileSystem;
-import dev.kopo.skyblockcore.SkyblockCore;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
