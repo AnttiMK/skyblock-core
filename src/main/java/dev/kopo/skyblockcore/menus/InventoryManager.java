@@ -9,7 +9,6 @@ import dev.kopo.skyblockcore.player.PlayerProvider;
 import dev.kopo.skyblockcore.protocol.SignGUIFactory;
 import dev.kopo.skyblockcore.providers.VaultProvider;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import javax.inject.Inject;
@@ -42,7 +41,7 @@ public class InventoryManager implements SubSystem {
     private void closeAll() {
         Bukkit.getOnlinePlayers().stream()
                 .filter(p -> p.getOpenInventory().getTopInventory().getHolder() instanceof AbstractInventory)
-                .forEach(HumanEntity::closeInventory);
+                .forEach(Player::closeInventory);
     }
 
     public void openInventory(Player player, InventoryType type) {
@@ -51,7 +50,7 @@ public class InventoryManager implements SubSystem {
             case BANKER ->
                     player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new BankerMenu(plugin, vaultProvider, signGUIFactory)).getInventory());
             case MAIN_MENU ->
-                    player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new MainMenu(player)).getInventory());
+                    player.openInventory(sbPlayer.getInventories().computeIfAbsent(type, k -> new MainMenu()).getInventory());
         }
     }
 

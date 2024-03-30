@@ -1,8 +1,8 @@
 package dev.kopo.skyblockcore.commands.admin;
 
-import net.kyori.adventure.text.Component;
 import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.commands.SkyblockCommand;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

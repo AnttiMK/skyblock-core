@@ -1,8 +1,8 @@
 package dev.kopo.skyblockcore.commands.general;
 
-import net.kyori.adventure.text.Component;
 import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.commands.SkyblockCommand;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;

@@ -63,8 +63,6 @@ public final class SignGUIFactory {
                 }, 2L);
             }
         });
-
-
     }
 
     public final class SignGUI {

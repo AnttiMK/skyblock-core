@@ -1,7 +1,7 @@
 package dev.kopo.skyblockcore.player;
 
-import dev.kopo.skyblockcore.SubSystem;
 import dev.kopo.skyblockcore.SkyblockCore;
+import dev.kopo.skyblockcore.SubSystem;
 import dev.kopo.skyblockcore.api.SkyblockPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

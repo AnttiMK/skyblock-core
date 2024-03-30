@@ -2,7 +2,7 @@ package dev.kopo.skyblockcore.commands.admin;
 
 import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.commands.SkyblockCommand;
-import dev.kopo.skyblockcore.npcs.crystals.CrystalTracker;
+import dev.kopo.skyblockcore.mechanics.regeneration.crystals.CrystalTracker;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,8 +1,8 @@
 package dev.kopo.skyblockcore.player;
 
+import dev.kopo.skyblockcore.api.SkyblockPlayer;
 import dev.kopo.skyblockcore.menus.AbstractInventory;
 import dev.kopo.skyblockcore.menus.InventoryType;
-import dev.kopo.skyblockcore.api.SkyblockPlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

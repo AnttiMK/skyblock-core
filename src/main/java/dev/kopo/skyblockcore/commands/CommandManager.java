@@ -1,10 +1,11 @@
 package dev.kopo.skyblockcore.commands;
 
+import dev.kopo.skyblockcore.SkyblockCore;
 import dev.kopo.skyblockcore.commands.admin.CrystalCommand;
+import dev.kopo.skyblockcore.commands.admin.OpenGUICommand;
 import dev.kopo.skyblockcore.commands.admin.SetSpawnCommand;
 import dev.kopo.skyblockcore.commands.general.HelpCommand;
 import dev.kopo.skyblockcore.commands.general.SpawnCommand;
-import dev.kopo.skyblockcore.SkyblockCore;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class CommandManager {
             SpawnCommand spawnCommand,
 
             SetSpawnCommand setSpawnCommand,
-            CrystalCommand crystalCommand
+            CrystalCommand crystalCommand,
+            OpenGUICommand openGUICommand
     ) {
         this.plugin = plugin;
         this.logger = logger;
@@ -34,7 +36,8 @@ public class CommandManager {
                 helpCommand,
                 spawnCommand,
                 setSpawnCommand,
-                crystalCommand
+                crystalCommand,
+                openGUICommand
         );
     }
 

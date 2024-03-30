@@ -63,9 +63,12 @@ public class MenuItemListener implements Listener {
 
     @EventHandler
     public void onItemInventoryClick(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player) {
+        if (event.getWhoClicked() instanceof Player p) {
             if (menuItem.isSimilar(event.getCurrentItem())) {
                 event.setCancelled(true);
+                if (event.getSlot() != 8) {
+                    p.getInventory().setItem(event.getSlot(), null);
+                }
             }
         }
     }
