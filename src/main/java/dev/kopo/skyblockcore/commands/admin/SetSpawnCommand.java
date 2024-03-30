@@ -25,7 +25,7 @@ public class SetSpawnCommand extends SkyblockCommand {
             sender.sendMessage(Component.text("Tämän komennon voi suorittaa vain pelissä."));
             return true;
         }
-        if (player.hasPermission("motimaa.admin")) {
+        if (player.hasPermission("skyblock.admin")) {
             plugin.getConfig().set("spawn", player.getLocation());
             plugin.saveConfig();
 
