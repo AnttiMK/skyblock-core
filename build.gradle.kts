@@ -3,21 +3,21 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "8.1.0"
+    id("io.github.goooler.shadow") version "8.1.7"
 }
 
-group = "dev.kopo"
+group = "dev.kopo.skyblockcore"
 version = "1.0.0-SNAPSHOT"
-var javaVersion = JavaVersion.VERSION_17
+val javaVersion = 21
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(javaVersion)
     }
 }
 
 tasks.withType<JavaCompile> {
-    options.release = javaVersion.majorVersion.toInt()
+    options.release = javaVersion
     options.encoding = "UTF-8"
 }
 
@@ -72,21 +72,21 @@ repositories {
     }
 }
 
-val daggerVersion = "2.44.2"
+val daggerVersion = "2.51.1"
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     compileOnly("net.luckperms:api:5.4")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.8-SNAPSHOT") {
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT") {
         exclude(group = "*", module = "*")
     }
-    compileOnly("net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT") {
+    compileOnly("net.citizensnpcs:citizens-main:2.0.33-SNAPSHOT") {
         exclude(group = "*", module = "*")
     }
-    compileOnly("me.clip:placeholderapi:2.11.2")
-    compileOnly("com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT")
-    compileOnly("me.blackvein.quests:quests-core:4.7.2")
+    compileOnly("me.clip:placeholderapi:2.11.5")
+    compileOnly("com.comphenix.protocol:ProtocolLib:5.2.0-SNAPSHOT")
+    compileOnly("me.pikamug.quests:quests-core:5.0.1")
     compileOnly("com.bgsoftware:SuperiorSkyblockAPI:2022.9")
 
     implementation("com.google.dagger:dagger:$daggerVersion")
@@ -94,7 +94,7 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.spongepowered:configurate-yaml:4.1.2")
-    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.1.0") {
         exclude(group = "com.github.waffle", module = "waffle-jna")
     }
