@@ -1,1 +1,5 @@
 rootProject.name = 'SkyblockCore'
+include(
+        "api",
+        "core"
+)
