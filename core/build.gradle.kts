@@ -69,7 +69,7 @@ dependencies {
     implementation("com.google.dagger:dagger:$daggerVersion")
     annotationProcessor("com.google.dagger:dagger-compiler:$daggerVersion")
 
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("org.spongepowered:configurate-yaml:4.1.2")
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3") {
