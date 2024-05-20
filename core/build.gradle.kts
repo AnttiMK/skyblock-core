@@ -72,7 +72,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.spongepowered:configurate-yaml:4.1.2")
     implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3") {
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.4.0") {
         exclude(group = "com.github.waffle", module = "waffle-jna")
     }
 
